@@ -17,19 +17,19 @@ def tinh_diem(so_tran, ban_thang, kien_tao):
 
 def xep_loai(diem):
     if diem < 15:
-        return "Can thanh ly/Cho muon"
+        return "Cần thanh lý cho mượn"
     elif diem < 30:
-        return "Du bi chien luoc"
+        return "Dự bị chiến lược"
     elif diem < 50:
-        return "Tru cot doi bong"
+        return "Trụ cột đội bóng"
     else:
-        return "Ngoi sao dang cap"
+        return "Ngôi sao đẳng cấp"
 
 
 def hien_thi_danh_sach():
 
     if len(players) == 0:
-        print("Danh sach cau thu dang rong")
+        print("Danh sách cầu thủ đang trống")
         return
 
     print("-" * 120)
@@ -59,29 +59,29 @@ def hien_thi_danh_sach():
         )
         
 def them_cau_thu():
-    ma_ct = input("Nhap ma cau thu: ")
+    ma_ct = input("Nhập mã cầu thủ: ")
     for player in players:
         if player["ma_ct"] == ma_ct:
-            print("Ma cau thu da ton tai")
+            print("Mã cầu thủ đã tồn tại")
             return
-    ho_ten = input("Nhap ho ten: ")
+    ho_ten = input("Nhập họ tên: ")
 
     try:
 
-        so_tran = int(input("Nhap so tran: "))
+        so_tran = int(input("Nhập số trận: "))
 
         if so_tran < 0 or so_tran > 50:
-            print("So tran phai tu 0 - 50")
+            print("Số trận phải từ 0 - 50")
             return
 
-        ban_thang = int(input("Nhap ban thang: "))
-        kien_tao = int(input("Nhap kien tao: "))
+        ban_thang = int(input("Nhập bàn thắng "))
+        kien_tao = int(input("NHập kiến tạo: "))
 
         if ban_thang < 0 or kien_tao < 0:
-            print("Du lieu khong hop le")
+            print("Dữ liệu hợp lệ")
             return
     except ValueError:
-        print("Vui long nhap so")
+        print("Vui lòng nhận só")
         return
 
     diem = tinh_diem(
@@ -103,32 +103,32 @@ def them_cau_thu():
         }
     )
 
-    print("Them thanh cong")
+    print("Thêm thành công")
 def xoa_cau_thu():
 
-    ma = input("Nhap ma can xoa: ")
+    ma = input("Nhập mã cầu thủ cần xóa: ")
 
     for player in players:
 
         if player["ma_ct"] == ma:
 
             xac_nhan = input(
-                "Ban co chac chan xoa? (Y/N): "
+                "Bạn có chắc chắn? (Y/N): "
             )
 
             if xac_nhan.upper() == "Y":
 
                 players.remove(player)
 
-                print("Xoa thanh cong")
+                print("Xóa thành công")
 
             return
 
-    print("Khong tim thay cau thu")
+    print("Không tìm thấy cầu thủ")
     
 def cap_nhat():
 
-    ma = input("Nhap ma cau thu can sua: ")
+    ma = input("Nhập mã cầu thủ cần sửa: ")
 
     for player in players:
 
@@ -137,19 +137,19 @@ def cap_nhat():
             try:
 
                 player["so_tran"] = int(
-                    input("Nhap so tran moi: ")
+                    input("Nhập số trận mới: ")
                 )
 
                 player["ban_thang"] = int(
-                    input("Nhap ban thang moi: ")
+                    input("Nhập số bàn thắng mới: ")
                 )
 
                 player["kien_tao"] = int(
-                    input("Nhap kien tao moi: ")
+                    input("Nhập kiến tạo mới: ")
                 )
 
             except ValueError:
-                print("Nhap sai dinh dang")
+                print("Nhập sai định dạng ")
                 return
 
             player["diem_hieu_suat"] = tinh_diem(
@@ -162,10 +162,10 @@ def cap_nhat():
                 player["diem_hieu_suat"]
             )
 
-            print("Cap nhat thanh cong")
+            print("Cập nhật thành công")
             return
 
-    print("Khong tim thay cau thu")
+    print("Không tìm thấy cầu thủ")
     
 def thong_ke():
 
@@ -176,13 +176,13 @@ def thong_ke():
 
     for player in players:
 
-        if player["phan_loai"] == "Ngoi sao dang cap":
+        if player["phan_loai"] == "Ngôi sao đẳng cấp":
             ngoi_sao += 1
 
-        elif player["phan_loai"] == "Tru cot doi bong":
+        elif player["phan_loai"] == "Trụ cột đội bóng":
             tru_cot += 1
 
-        elif player["phan_loai"] == "Du bi chien luoc":
+        elif player["phan_loai"] == "Dự bị chiến lược":
             du_bi += 1
 
         else:
@@ -196,16 +196,16 @@ def thong_ke():
 while True:
 
     print("\n========== QUAN LY CAU THU ==========")
-    print("1. Hien thi danh sach")
-    print("2. Tiep nhan cau thu moi")
-    print("3. Cap nhat thong tin va chi so")
-    print("4. Xoa cau thu")
-    print("5. Tim kiem cau thu")
-    print("6. Thong ke phan loai phong do")
-    print("7. Danh gia phong do tu dong")
-    print("8. Thoat")
+    print("1. Hiển thị danh sách cầu thủ")
+    print("2. Tiếp nhận cầu thủ mới")
+    print("3. Cập nhật thông tin và số")
+    print("4. Xóa cầu thủ(Thanh lý hợp đồng)")
+    print("5. Tìm kiếm cầu thủ")
+    print("6. Thống kê loại phong độ")
+    print("7. đánh giá tự động")
+    print("8. Thoát chương trình")
 
-    choice = input("Nhap lua chon: ")
+    choice = input("Nhập lựa chọn: ")
 
     if choice == "1":
         hien_thi_danh_sach()
